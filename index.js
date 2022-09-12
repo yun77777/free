@@ -7,11 +7,10 @@ const dotenv = require('dotenv');
 dotenv.config()
 
 const config = require('./config/key')
-
-const { User } = require('./models/User')
-
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
+
+const { User } = require('./models/User')
 
 // application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
