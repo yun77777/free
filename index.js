@@ -6,7 +6,19 @@ const mongoose = require('mongoose')
 const dotenv = require('dotenv');
 dotenv.config()
 
-mongoose.connect(`mongodb+srv://${process.env.DB_ID}:${process.env.DB_PW}@freecluster.u5jqszg.mongodb.net/?retryWrites=true&w=majority`, {
+const config = require('./config/key')
+
+const { User } = require('./models/User')
+
+const bodyParser = require('body-parser')
+
+// application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }))
+
+// application/json
+app.use(bodyParser.json())
+
+mongoose.connect(config.mongoURI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         // useCreateIndex: true,
@@ -15,5 +27,15 @@ mongoose.connect(`mongodb+srv://${process.env.DB_ID}:${process.env.DB_PW}@freecl
     .catch(err => console.log(err))
 
 app.get('/', (req, res) => res.send('hi'))
+
+app.post('/register', (req, res) => {
+    const user = new User(req.body)
+    user.save((err, userInfo) => {
+        if (err) return res.json({ success: false, err })
+        return res.status(200).json({
+            success: true
+        })
+    })
+})
 
 app.listen(port, () => console.log('listening on port 5000'))
