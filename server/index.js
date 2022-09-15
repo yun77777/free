@@ -1,6 +1,5 @@
 const express = require('express')
 const app = express()
-const port = 5000
 
 const mongoose = require('mongoose')
 const dotenv = require('dotenv');
@@ -20,7 +19,11 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(cookieParser())
 
-mongoose.connect(config.mongoURI, {
+
+// process.env.NODE_ENV = ( process.env.NODE_ENV && ( process.env.NODE_ENV ).trim().toLowerCase() == 'production' ) ? 'prod' : 'dev';
+console.log('config.mongoURI -> ', config.MONGO_URI)
+
+mongoose.connect(config.MONGO_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         // useCreateIndex: true,
@@ -94,5 +97,11 @@ app.get('/api/users/logout', auth, (req, res) => {
             })
         })
 })
+
+app.get('/api/hello', (req,res)=>{
+    res.send('/api/hello')
+})
+
+const port = 5000
 
 app.listen(port, () => console.log('listening on port 5000'))
