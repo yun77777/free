@@ -41,8 +41,10 @@
             return newState // return the next state
         }
 
-        var store = Redux.createStore(reducer);
-        console.log(store.getState())
+        var store = Redux.createStore(
+            reducer,
+            window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+        );
 
         function red() {
             var state = store.getState();
