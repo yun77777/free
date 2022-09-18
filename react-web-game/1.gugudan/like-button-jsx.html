@@ -1,0 +1,56 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Like</title>
+</head>
+<body>
+<div id="root"></div>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<!--<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>-->
+<!--<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>-->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    'use strict';
+
+    class Like extends React.Component {
+        constructor(props){
+            super(props);
+            this.state={
+                liked:false,
+                result: ''
+            };
+        }
+
+        onClickButton = (e) => {
+            if(this.state.liked === false) {
+                this.setState({
+                    liked:true,
+                    result: 'liked'
+                })
+            }
+            else {
+                this.setState({
+                    liked: false,
+                    result: 'unliked'
+                })
+            }
+        }
+
+        render(){
+            return (
+                <React.Fragment>
+                    <hr/>
+                    <input type="button" value="click" onClick={this.onClickButton}/>
+                    <hr/>
+                    <label>result</label>
+                    <h2>{this.state.result}</h2>
+                </React.Fragment>);
+        }
+    }
+</script>
+<script type="text/babel">
+    ReactDOM.createRoot(document.querySelector('#root')).render(<Like/>);
+</script>
+</body>
+</html>
