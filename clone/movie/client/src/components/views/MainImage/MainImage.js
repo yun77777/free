@@ -26,7 +26,6 @@ function MainImage() {
         const mainImgURL = "https://image.tmdb.org/t/p/w200" + poster_path;
         document.querySelector('.mainImg').src=mainImgURL;
         console.log('mainImgURL -> ', mainImgURL)
-
     }
 
   return (
