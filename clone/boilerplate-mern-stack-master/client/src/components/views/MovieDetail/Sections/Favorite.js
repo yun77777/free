@@ -1,10 +1,11 @@
 import Axios from 'axios'
 import React, {useEffect, useState} from 'react'
+import {Button} from 'antd'
 
 function Favorite(props) {
     const movieId = props.movieId
     const userFrom = props.userFrom
-    const movieTitle = props.movieInfo.movieTitle
+    const movieTitle = props.movieInfo.title
     const moviePost = props.movieInfo.backdrop_path
     const movieRunTime = props.movieInfo.runtime
 
@@ -66,7 +67,7 @@ function Favorite(props) {
     }
 
   return (
-    <button onClick={onClickFavorite}>{Favorited ? "Not Favorite" : "Add to Favorite"} {FavoriteNumber}</button>
+    <Button onClick={onClickFavorite}>{Favorited ? "Not Favorite" : "Add to Favorite"} {FavoriteNumber}</Button>
   )
 }
 
